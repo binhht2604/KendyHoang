@@ -1,0 +1,115 @@
+package com.fsoft.FootballManagementSpring.entity;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Location.
+ */
+@Entity
+@Table(name = "location", uniqueConstraints = { @UniqueConstraint(columnNames = "nameLocation") })
+public class Location {
+
+	/** The id location. */
+	private int idLocation;
+
+	/** The name location. */
+	private String nameLocation;
+
+	/** The game. */
+	private Set<Game> game = new HashSet<Game>(0);
+
+	/**
+	 * Instantiates a new location.
+	 */
+	public Location() {
+	}
+
+	/**
+	 * Instantiates a new location.
+	 *
+	 * @param idLocation
+	 *            the id location
+	 * @param nameLocation
+	 *            the name location
+	 */
+	public Location(int idLocation, String nameLocation) {
+		super();
+		this.idLocation = idLocation;
+		this.nameLocation = nameLocation;
+	}
+
+	/**
+	 * Gets the id location.
+	 *
+	 * @return the id location
+	 */
+	@Id
+	@Column(name = "idLocation")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	public int getIdLocation() {
+		return idLocation;
+	}
+
+	/**
+	 * Sets the id location.
+	 *
+	 * @param idLocation
+	 *            the new id location
+	 */
+	public void setIdLocation(int idLocation) {
+		this.idLocation = idLocation;
+	}
+
+	/**
+	 * Gets the name location.
+	 *
+	 * @return the name location
+	 */
+	@Column(name = "nameLocation", length = 45)
+	public String getNameLocation() {
+		return nameLocation;
+	}
+
+	/**
+	 * Sets the name location.
+	 *
+	 * @param nameLocation
+	 *            the new name location
+	 */
+	public void setNameLocation(String nameLocation) {
+		this.nameLocation = nameLocation;
+	}
+
+	/**
+	 * Gets the game.
+	 *
+	 * @return the game
+	 */
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "location")
+	public Set<Game> getGame() {
+		return game;
+	}
+
+	/**
+	 * Sets the game.
+	 *
+	 * @param game
+	 *            the new game
+	 */
+	public void setGame(Set<Game> game) {
+		this.game = game;
+	}
+
+}
